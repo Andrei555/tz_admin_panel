@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('first_name', 30);
             $table->string('last_name', 30);
             $table->string('email', 50)->nullable();
-            $table->tinyInteger('phone')->nullable();
+            $table->integer('phone')->nullable();
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');

@@ -15,28 +15,28 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="exampleInputName">{{ 'Company name' }}</label>
+                        <label for="inputName">{{ 'Company name' }}</label>
                         <input class="form-control" type="text" name="name"
                                value="{{ $company->name }}" placeholder="{{ 'Enter name' }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label for="inputEmail">{{ 'Email address' }}</label>
                         <input class="form-control" type="text" name="email"
                                value="{{ $company->email }}" placeholder="{{ 'Enter email' }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputWebsite">{{ 'Site of the company' }}</label>
+                        <label for="inputWebsite">{{ 'Site of the company' }}</label>
                         <input class="form-control" type="text" name="url"
                                value="{{ $company->website }}" placeholder="{{ 'Enter link to site' }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputLogo">{{ 'Upload company logo' }}</label>
+                        <label for="inputLogo">{{ 'Upload company logo' }}</label>
                         <input class="form-control" type="file" name="logo">
                     </div>
                 </div>
             </div>
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{ 'Submit' }}</button>
             </div>
         </form>
     </div>

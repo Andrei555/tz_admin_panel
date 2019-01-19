@@ -16,6 +16,11 @@
             </div>
             <div class="col-sm-6">
                 <h5 class="text-center">{{ 'List of employee' }}</h5>
+                <ul class="list-group">
+                    @foreach($employees as $employee)
+                        <li class="list-group-item">{{ $employee->fullName() }}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

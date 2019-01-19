@@ -13,11 +13,11 @@ class Company extends Model
     protected $fillable = ['name', 'email', 'logo', 'website'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function employees()
     {
-        return $this->belongsTo('App\Company');
+        return $this->hasMany('App\Employee');
     }
 
     /**

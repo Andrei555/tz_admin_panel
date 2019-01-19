@@ -23,20 +23,20 @@
                         <img src="{{ $company->getLogoUrl() }}" alt="no_avatar" width="auto" height="24">
                     </td>
                     <td>
-                        <a href="{{ route('admin.companies.show', ['id' => $company->id]) }}">
+                        <a href="{{ route('admin.companies.show', $company) }}">
                             {{ $company->name }}
                         </a>
                     </td>
                     <td>{{ $company->email }}</td>
                     <td>{{ $company->website }}</td>
                     <td>
-                        <form action="{{ route('admin.companies.destroy', $company) }}" method="post" name="form_delete">
+                        <form action="{{ route('admin.companies.destroy', $company) }}" method="post" class="form_delete">
                             {{ csrf_field() }}
                             <input name="_method" type="hidden" value="DELETE">
                             <a href="{{ route('admin.companies.edit', $company) }}">
                                 <i class="fas fa-edit fa-lg"></i>
                             </a>
-                            <a href="#" onclick="document.forms['form_delete'].submit()">
+                            <a href="#" onclick="sendForm()">
                                 <i class="fas fa-trash-alt fa-lg"></i>
                             </a>
                         </form>
@@ -54,4 +54,9 @@
             </ul>
         </div>
     </div>
+    <script>
+        function sendForm() {
+            event.target.closest('form.form_delete').submit();
+        }
+    </script>
 @endsection

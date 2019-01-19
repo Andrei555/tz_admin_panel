@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Company;
+use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCompanyRequest;
 
@@ -16,7 +17,7 @@ class CompanyController extends Controller
     public function index()
     {
         return view('admin.companies.index', [
-            'companies' => Company::paginate(5)
+            'companies' => Company::paginate(10)
         ]);
     }
 
@@ -53,7 +54,8 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         return view('admin.companies.view', [
-            'company' => $company
+            'company' => $company,
+            'employees' => $company->employees()->get()
         ]);
     }
 
@@ -90,6 +92,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        $employeesIds = $company->employees()->get()->pluck('id')->toArray();
+        Employee::destroy($employeesIds);
         $company->delete();
 
         return redirect(route('admin.companies.index'))->with('flash_message', __('Data has been deleted'));

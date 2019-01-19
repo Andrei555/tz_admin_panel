@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Company;
+use App\Employee;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreEmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +16,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('admin.employees.index');
+        return view('admin.employees.index', [
+            'employees' => Employee::with('company')->paginate(10),
+            'companies' => Company::all()
+        ]);
     }
 
     /**
@@ -24,62 +29,75 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.employees.create', [
+            'companies' => Company::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreEmployeeRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
-        //
+        Employee::create($request->all());
+
+        return redirect(route('admin.employees.index'))->with('flash_message', __('Data saved successfully'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Employee $employee)
     {
-        //
+        return view('admin.employees.view', [
+            'employee' => $employee
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        //
+        return view('admin.employees.edit', [
+            'companies'  => Company::all(),
+            'employee' => $employee,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreEmployeeRequest $request
+     * @param Employee $employee
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(StoreEmployeeRequest $request, Employee $employee)
     {
-        //
+        $employee->update($request->all());
+
+        return redirect(route('admin.employees.index'))->with('flash_message', __('Data changed successfully'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return redirect(route('admin.employees.index'))->with('flash_message', __('Data has been deleted'));
     }
 }
