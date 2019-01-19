@@ -18,8 +18,8 @@ class CreateEmployeesTable extends Migration
             $table->integer('company_id')->unsigned()->index();
             $table->string('first_name', 30);
             $table->string('last_name', 30);
-            $table->string('email', 50)->unique()->nullable();
-            $table->tinyInteger('phone')->unique()->nullable();
+            $table->string('email', 50)->nullable();
+            $table->tinyInteger('phone')->nullable();
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');

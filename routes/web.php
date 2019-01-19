@@ -29,3 +29,17 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], function () {
+    //Default
+    Route::get('/', 'AdminController@index')->name('admin.index');
+
+    //Companies
+    Route::resource('companies', 'CompanyController', ['as'=>'admin']);
+    //Route::get('companies', 'CompanyController@index')->name('admin.companies');
+
+    //Employees
+    Route::resource('employees', 'EmployeeController', ['as'=>'admin']);
+    //Route::get('employees', 'CompanyController@index')->name('admin.employees');
+});
+
