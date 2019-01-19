@@ -7,6 +7,16 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+<h2><strong>Install project</strong></h2>
+<ol>
+    <li>Clone repository.</li>
+    <li>Create .env file from .env.example</li>
+    <li>chmod -R 777 storage/</li>
+    <li>php artisan key:generate</li>
+    <li>php artisan migrate:refresh --seed</li>
+    <li>php artisan storage:link</li>
+</ol>
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
