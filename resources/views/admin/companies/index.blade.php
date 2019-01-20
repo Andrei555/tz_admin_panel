@@ -4,7 +4,9 @@
     <div class="container-fluid">
         <h1 class="text-center">{{ 'Companies' }}</h1>
 
+        @php($message = 'When you delete a company, all its employees will be deleted!')
         @include('admin.common.flash_message')
+        @include('admin.common.modal', ['message' => $message])
 
         <table class="table table-striped">
             <thead>
@@ -36,7 +38,7 @@
                             <a href="{{ route('admin.companies.edit', $company) }}">
                                 <i class="fas fa-edit fa-lg"></i>
                             </a>
-                            <a href="#" onclick="sendForm()">
+                            <a href="#">
                                 <i class="fas fa-trash-alt fa-lg"></i>
                             </a>
                         </form>
@@ -54,9 +56,5 @@
             </ul>
         </div>
     </div>
-    <script>
-        function sendForm() {
-            event.target.closest('form.form_delete').submit();
-        }
-    </script>
+    <script src="{{ asset('js/main.js') }}"></script>
 @endsection
